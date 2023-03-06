@@ -22,8 +22,8 @@ struct ReadedView: View {
             .navigationTitle(option.rawValue)
         } else {
             List(vm.booksId(ids: vm.readed)) { book in
-                HStack {
-                    NavigationLink(value: book) {
+                NavigationLink(value: book) {
+                    HStack {
                         CoverView(url: book.cover)
                             .frame(width: 100, height: 150)
                         VStack(alignment:.center) {
@@ -31,6 +31,18 @@ struct ReadedView: View {
                                 .bold()
                             Text(vm.authors[book.author] ?? "")
                         }
+                    }
+                    .swipeActions {
+                        Button {
+                            Task {
+                                if await vm.toggleReaded(readed: ReadedBooks(books: [book.id], email: vm.userData.email)) {
+                                    await vm.getReaded(email: vm.userData.email)
+                                }
+                            }
+                        } label: {
+                            Label("Unread", systemImage: "bookmark.slash")
+                        }
+                        .tint(.red)
                     }
                 }
             }
