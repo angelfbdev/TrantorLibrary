@@ -28,6 +28,7 @@ struct OrdersView: View {
                         .badge(vm.ordersByState[state.rawValue]?.count ?? 0)
                 }
             }
+            .foregroundColor(Color("Primary"))
             .navigationTitle("Orders")
             .navigationDestination(for: Status.self) { state in
                 OrderListView(orders: vm.ordersByState[state.rawValue]?.sorted(by: {$0.date < $1.date}) ?? [], state: state.rawValue)
@@ -54,6 +55,7 @@ struct OrdersView: View {
             .alert("Log Out", isPresented: $logout) {
                 Button(role: .destructive) {
                     vm.userData = UserData(name: "", email: "", location: "", role: "")
+                    vm.showAlertLogin = false
                     vm.screen = .login
                 } label: {
                     Text("Done")

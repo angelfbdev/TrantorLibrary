@@ -31,6 +31,7 @@ struct NewUserView: View {
         VStack {
             Text("Register Data")
                 .font(.largeTitle.bold())
+                .foregroundColor(Color("Primary"))
                 .padding()
             Form {
                 FormRowView(error: $error[0], label: "Email", placeholder: "Enter email address", text: $email, validation: vm.validateEmail)
@@ -49,9 +50,15 @@ struct NewUserView: View {
                         }
                     }
                     .pickerStyle(.menu)
+                    .bold()
                 }
                 .opacity(user ? 0 : 1)
+                .foregroundColor(Color("Primary"))
             }
+            .scrollContentBackground(.hidden)
+            .foregroundColor(Color("Primary"))
+            .background(Color("Primary").opacity(0.3))
+            .frame(width: 350, height: 500)
             
             HStack {
                 Button {
@@ -61,8 +68,11 @@ struct NewUserView: View {
                     newUser.toggle()
                 } label: {
                     Text("Cancel")
+                        .foregroundColor(Color("Primary"))
+                        .bold()
                 }
-                .buttonStyle(.bordered)
+                .buttonStyle(.borderedProminent)
+                .tint(Color("Primary").opacity(0.2))
                 
                 Button {
                     Task {
@@ -72,6 +82,7 @@ struct NewUserView: View {
                         } else {
                             if await vm.newUser(user:NewUser(role: vm.roleConvert(text: role.rawValue), name: name, location: location, email: email)) {
                                 userCreated.toggle()
+                                alertMsg = ""
                             } else {
                                 alert.toggle()
                                 alertMsg = "Try again later"
@@ -81,7 +92,8 @@ struct NewUserView: View {
                 } label: {
                     Text("Submit")
                 }
-                .buttonStyle(.bordered)
+                .buttonStyle(.borderedProminent)
+                .tint(Color("Primary"))
                 .disabled(error.contains(true))
             }
         }

@@ -16,15 +16,15 @@ struct RatingView: View {
             ForEach(1..<6) { index in
                 if rating >= Double(index) {
                     Image(systemName: "star.fill")
-                        .foregroundColor(.yellow)
+                        .foregroundColor(Color("Primary"))
                         .font(.system(size: size))
                 } else if rating >= Double(index) - 0.5 {
                     Image(systemName: "star.leadinghalf.fill")
-                        .foregroundColor(.yellow)
+                        .foregroundColor(Color("Primary"))
                         .font(.system(size: size))
                 } else {
                     Image(systemName: "star")
-                        .foregroundColor(.yellow)
+                        .foregroundColor(Color("Primary"))
                         .font(.system(size: size))
                 }
             }

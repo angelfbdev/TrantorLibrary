@@ -52,6 +52,7 @@ struct DetailOrderView: View {
                 .pickerStyle(.menu)
             }
         }
+        .foregroundColor(Color("Primary"))
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {

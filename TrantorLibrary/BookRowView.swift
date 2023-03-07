@@ -24,17 +24,14 @@ struct BookRowView: View {
                 VStack {
                     Text(book.title)
                         .font(.callout.bold())
-                        .foregroundColor(.black)
                         .lineLimit(2)
                     Text(vm.authors[book.author] ?? "Not Available")
                         .font(.caption.bold())
-                        .foregroundColor(.black)
                     RatingView(rating: book.rating ?? 0, size: 10)
                     
                     HStack {
                         Text("\(book.price.description)€")
                             .font(.title3.bold())
-                            .foregroundColor(.black)
                         
                         Spacer()
                         
@@ -42,10 +39,10 @@ struct BookRowView: View {
                             vm.addToCart(book: book.id)
                         } label: {
                             Label("Buy", systemImage: "cart")
+                                .foregroundColor(.white)
                         }
                         .buttonStyle(.borderedProminent)
-                        .tint(.yellow)
-                        .foregroundColor(.black)
+                        .tint(Color("Primary"))
                         
                     }
                     .padding(.top, 10)
@@ -57,10 +54,10 @@ struct BookRowView: View {
                 Image(systemName: "bookmark.fill")
                     .resizable()
                     .frame(width: 20, height: 30)
-                    .foregroundColor(.red)
             }
         }
         .frame(width: 350, height: 150)
+        .foregroundColor(Color("Primary"))
     }
 }
 

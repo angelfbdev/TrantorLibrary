@@ -16,7 +16,6 @@ struct DetailView: View {
     
     var body: some View {
         VStack {
-            
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading) {
                     Text(vm.authors[book.author] ?? "Not Available")
@@ -52,7 +51,7 @@ struct DetailView: View {
                                 Label(!vm.isReaded(id: book.id) ? "Read" : "Unread", systemImage: !vm.isReaded(id: book.id) ? "bookmark.fill" : "bookmark.slash.fill")
                             }
                             .buttonStyle(.borderedProminent)
-                            // .tint(vm.isReaded(id: book.id) ? .green : .red)
+                            .foregroundColor(.white)
                         }
                         Spacer()
                         VStack {
@@ -103,6 +102,7 @@ struct DetailView: View {
         .navigationTitle(book.title)
         .navigationBarTitleDisplayMode(.large)
         .padding(.horizontal)
+        .foregroundColor(Color("Primary"))
     }
 }
 

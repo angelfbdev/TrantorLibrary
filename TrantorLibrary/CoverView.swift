@@ -19,7 +19,8 @@ struct CoverView: View {
                     .cornerRadius(20)
             case .failure, .empty:
                 RoundedRectangle(cornerRadius: 20)
-                    .opacity(0.1)
+                    .foregroundColor(Color("Primary"))
+                    .opacity(0.3)
                     .overlay {
                         Image(systemName: "book")
                             .resizable()

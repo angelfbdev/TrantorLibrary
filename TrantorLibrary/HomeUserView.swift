@@ -9,17 +9,25 @@ import SwiftUI
 
 struct HomeUserView: View {
     @EnvironmentObject var vm: GeneralViewModel
-
+    let gradient = LinearGradient(colors: [.blue, .white], startPoint: .top, endPoint: .bottom)
+    
     var body: some View {
         NavigationStack {
             VStack {
                 HStack {
                     VStack (alignment: .leading){
-                        Text("Hello,\(vm.userData.name)")
-                            .font(.title.bold())
+                        Text("HELLO,\(vm.userData.name.uppercased())")
+                            .font(.title2.bold())
+                            .foregroundColor(Color("Primary"))
                             .lineLimit(1)
+                            .padding(5)
+
                         Text("Today's recommendation")
                             .font(.title.bold())
+                            .foregroundColor(Color("Primary"))
+                            .padding(5)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .padding(.bottom)
                     }
                     Spacer()
                 }
@@ -45,17 +53,28 @@ struct HomeUserView: View {
                 .navigationDestination(for: Book.self) { book in
                     DetailView(book: book)
                 }
-                .padding(.bottom, 60)
+                .padding(.bottom, 40)
                 
                 VStack(alignment: .leading) {
                     Text("Categories")
-                        .font(.title2.bold())
+                        .font(.title.bold())
+                        .foregroundColor(Color("Primary"))
+                        .padding(5)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                        .padding(.leading)
+                        .padding(.bottom)
                     List(Categories.allCases, id: \.self) { category in
                         NavigationLink(value: category) {
                             Text(category.rawValue)
+                                .padding(.vertical, 5)
                         }
+                        .listRowBackground(Color("Primary").opacity(0.2))
+                        .listRowSeparator(.hidden)
                     }
                     .listStyle(.plain)
+                    .foregroundColor(Color("Primary"))
+                    .bold()
+                    .padding(.horizontal)
                 }
                 .navigationDestination(for: Categories.self) { category in
                     SortCatalogueView(category: category)

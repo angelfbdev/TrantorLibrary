@@ -41,6 +41,7 @@ struct OrderRowView: View {
                 }
             }
         }
+        .foregroundColor(Color("Primary"))
     }
 }
 

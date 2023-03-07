@@ -39,7 +39,7 @@ struct FormRowView: View {
             .background {
                 Rectangle()
                     .stroke(lineWidth: 2)
-                    .fill(.red)
+                    .fill(Color("Primary"))
                     .opacity(error ? 1.0 : 0.0)
             }
             .keyboardType(.emailAddress)
@@ -48,7 +48,7 @@ struct FormRowView: View {
             if error {
                 Text(message)
                     .font(.caption)
-                    .foregroundColor(.red)
+                    .foregroundColor(Color("Primary"))
             }
         }
         .onChange(of: text) { newValue in

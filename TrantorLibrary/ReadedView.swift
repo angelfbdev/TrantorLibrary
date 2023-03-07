@@ -19,6 +19,7 @@ struct ReadedView: View {
                     .font(.title.bold())
                 Text("Swipe left over a book to add")
             }
+            .foregroundColor(Color("Primary"))
             .navigationTitle(option.rawValue)
         } else {
             List(vm.booksId(ids: vm.readed)) { book in
@@ -46,6 +47,7 @@ struct ReadedView: View {
                     }
                 }
             }
+            .foregroundColor(Color("Primary"))
             .navigationTitle(option.rawValue)
             .navigationDestination(for: Book.self) { book in
                 DetailView(book: book)

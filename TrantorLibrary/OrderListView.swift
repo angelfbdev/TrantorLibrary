@@ -36,6 +36,7 @@ struct OrderListView: View {
                     }
                 }
             }
+            .foregroundColor(Color("Primary"))
             .navigationTitle(title)
             .navigationDestination(for: Order.self) { order in
                 DetailOrderView(order: order)

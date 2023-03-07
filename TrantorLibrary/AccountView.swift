@@ -44,6 +44,7 @@ struct AccountView: View {
             .alert("Log Out", isPresented: $logout) {
                 Button(role: .destructive) {
                     vm.userData = UserData(name: "", email: "", location: "", role: "")
+                    vm.showAlertLogin = false
                     vm.screen = .login
                 } label: {
                     Text("Logout")

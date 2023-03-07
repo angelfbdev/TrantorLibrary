@@ -13,48 +13,52 @@ struct CartView: View {
     @State var order = false
     
     var body: some View {
-        VStack {
-            if vm.cart.isEmpty {
-                VStack {
-                    Text("Basket is empty")
-                        .font(.title.bold())
-                    Text("Add a book to your basket")
-                }
-            } else {
-                List(vm.booksId(ids: vm.cart)) { book in
-                    HStack {
-                        CoverView(url: book.cover)
-                            .frame(width: 80, height: 100)
-                        VStack {
-                            Text(book.title)
-                                .bold()
-                                .lineLimit(1)
-                            Text(vm.authors[book.author] ?? "Not Available")
-                            VStack(alignment: .trailing) {
-                                Text("Price: \(vm.doubleConvert(book.price, decimal: 2))€")
+        NavigationStack {
+            VStack {
+                if vm.cart.isEmpty {
+                    VStack {
+                        Text("Basket is empty")
+                            .font(.title.bold())
+                        Text("Add a book to your basket")
+                    }
+                } else {
+                    List(vm.booksId(ids: vm.cart)) { book in
+                        HStack {
+                            CoverView(url: book.cover)
+                                .frame(width: 80, height: 100)
+                            VStack {
+                                Text(book.title)
+                                    .bold()
+                                    .lineLimit(1)
+                                Text(vm.authors[book.author] ?? "Not Available")
+                                VStack(alignment: .trailing) {
+                                    Text("Price: \(vm.doubleConvert(book.price, decimal: 2))€")
+                                }
+                            }
+                            
+                            Spacer()
+                            
+                            Button {
+                                vm.removeFromCart(book: book.id)
+                            } label: {
+                                Image(systemName: "trash")
                             }
                         }
-                        
-                        Spacer()
-                        
-                        Button {
-                            vm.removeFromCart(book: book.id)
-                        } label: {
-                            Image(systemName: "trash")
-                        }
                     }
+                    
+                    Button {
+                        order.toggle()
+                    } label: {
+                        Label("Process order \(vm.doubleConvert(vm.cartPrice(), decimal: 2))€", systemImage: "creditcard")
+                            .font(.title3.bold())
+                    }
+                    .buttonStyle(.bordered)
+                    .disabled(vm.cart.count == 0)
+                    .padding()
                 }
-                
-                Button {
-                    order.toggle()
-                } label: {
-                    Label("Process order \(vm.doubleConvert(vm.cartPrice(), decimal: 2))€", systemImage: "creditcard")
-                        .font(.title3.bold())
-                }
-                .buttonStyle(.bordered)
-                .disabled(vm.cart.count == 0)
-                .padding()
             }
+            .navigationTitle("Cart")
+            .foregroundColor(Color("Primary"))
         }
         .alert("Order Confirmation", isPresented: $order) {
             HStack {
